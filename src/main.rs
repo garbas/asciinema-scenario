@@ -245,33 +245,12 @@ fn main() -> Result<(), Error> {
 
         // everything else print immediately
         } else {
-            // apply brightness after #
-            let parts: Vec<&str> = line.splitn(2, '#').collect();
             print_entry(Entry {
                 time: time,
                 event_type: EventType::Output,
-                event_data: format!(
-                    "{}\r\n",
-                    if parts.len() == 1 {
-                        parts[0].to_string()
-                    } else {
-                        [&["\x1b[1m", "#"], &parts[..], &["\x1b[0m"]]
-                            .concat()
-                            .join("")
-                    }
-                ),
+                event_data: line.clone(),
             })?;
-            preview_lines.push(if parts.len() == 1 {
-                vec![parts[0].to_string()]
-            } else {
-                vec![
-                    parts[0].to_string(),
-                    format!(
-                        "<tspan class=\"fg-15\">#{}</tspan>",
-                        parts.clone().split_off(1).join("")
-                    ),
-                ]
-            });
+            preview_lines.push(vec![line.to_string()]);
         }
     }
 
