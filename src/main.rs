@@ -248,7 +248,7 @@ fn main() -> Result<(), Error> {
             print_entry(Entry {
                 time: time,
                 event_type: EventType::Output,
-                event_data: line.clone(),
+                event_data: format!("{}\r\n", line.clone()),
             })?;
             preview_lines.push(vec![line.to_string()]);
         }

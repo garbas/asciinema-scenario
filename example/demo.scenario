@@ -3,7 +3,7 @@
 $ # How to use asciinema-scenario?
 
 $ # You first need to write a scenario file for your video.
-$ # It could be something like this:
+$ # It could look something like this:
 
 $ bat -n demo.scenario
    1 #! { "step": 0.10, "width": 77, "height": 20 }
