@@ -1,0 +1,50 @@
+#! { "step": 0.10, "width": 77, "height": 20 }
+
+$ # How to use asciinema-scenario?
+
+$ # You first need to write a scenario file for your video.
+$ # It could be something like this:
+
+$ bat demo.scenario
+───────┬────────────────────────────────────────────────────────────────────
+       │ File: demo.scenario
+───────┼────────────────────────────────────────────────────────────────────
+   1   │ #! { "step": 0.10, "width": 77, "height": 20 }
+   2   │ # This is a comment
+   3   │ $ # This line is going to be typed out
+   4   │ $ echo "Hello world"
+   5   │ Hello world
+────────┴────────────────────────────────────────────────────────────────────
+
+$ # Now you can use asciinema-scenario to generate cast file.
+$ asciinema-scenario demo.scenario > demo.cast
+
+$ # To play the video you need to use the asciinema-player
+$ bat index.html
+────────┬────────────────────────────────────────────────────────────────────
+        │ File: index.html
+────────┼────────────────────────────────────────────────────────────────────
+    1   │ <!DOCTYPE html>
+    2   │ <html>
+    3   │ <head>
+    4   │   <meta http-equiv="content-type"
+    5   │         content="text/html; charset=utf-8">
+    6   │   <title>Asciinema Scenario Example</title>
+    7   │   <link rel="stylesheet" 
+    8   │         type="text/css"
+    9   │         href="asciinema-player.css" />
+   10   │ </head>
+   11   │ <body>
+   12   │   <h1>Asciinema Scenario Example</h1>
+   13   │   <asciinema-player cols="77" 
+   14   │                     rows="24" 
+   15   │                     src="example.cast"></asciinema-player>
+   16   │   <script src="asciinema-player.js"></script>
+   17   │ </body>
+   18   │ </html>
+────────┴────────────────────────────────────────────────────────────────────
+
+$ # That is it. Don't rerecord your video because you did a typo or
+$ # typed to slow.
+
+$ # Now read the .scenario format and go crazy!

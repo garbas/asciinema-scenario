@@ -1,0 +1,27 @@
+[package]
+name = "asciinema-scenario"
+version = "0.1.0"
+authors = ["Rok Garbas <rok@garbas.si>"]
+edition = "2018"
+description = "Create asciinema videos from a text file."
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/garbas/asciinema-scenario"
+repository = "https://github.com/garbas/asciinema-scenario"
+keywords = ["asciinema","asciicast"]
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
+
+[dependencies]
+structopt = "0.3.14"
+structopt-derive = "0.4.7"
+structopt-flags = { version = "0.3.5", features = ["simplelog"] }
+failure = "0.1.8"
+simplelog = "0.8.0"
+log = "0.4.8"
+asciicast = "0.2.2"
+serde_json = "1.0.53"
+serde = { version = "1.0.111", features = ["derive"] }
+svg = "0.8.0"
