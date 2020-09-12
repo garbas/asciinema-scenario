@@ -12,6 +12,7 @@ keywords = ["asciinema","asciicast"]
 include = [
     "**/*.rs",
     "Cargo.toml",
+    "README.md",
 ]
 
 [dependencies]
