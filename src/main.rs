@@ -60,12 +60,13 @@ fn print_entry(entry: Entry) -> Result<(), Error> {
 }
 
 fn clear_terminal(time: &mut f64, step: &f64) -> Result<(), Error> {
-  *time += 3.0 * step;
+  *time += 18.0 * step;
   print_entry(Entry {
     time: *time,
     event_type: EventType::Output,
     event_data: "\r\x1b[2J\r\x1b[H".to_string(),
   })?;
+  *time += 3.0 * step;
   Ok(())
 }
 
