@@ -34,6 +34,18 @@ this tool.
 * Everything else will be displayed immediately.
 
 
+## Releases
+
+Detailed release notes are available in this repo at [CHANGES.md](CHANGES.md).
+
+
+## Reporting issues
+
+Found a bug? I'd love to know about it!
+
+Please report all issues on the GitHub [issue tracker](https://github.com/garbas/asciinema-scenario/issues).
+
+
 ## License
 
 Licensed under either of these:
