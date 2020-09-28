@@ -16,20 +16,27 @@ this tool.
 
 ## How to write a .scenario file?
 
-* First list is header, which starts with `#!` and is followed by JSON
-  object. The object must include ...
+* If first line starts with `#!` it must be followed by JSON object. The object
+  can include:
 
-* Empty lines will be skipped.
+    | Name | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | step | float | 0.10 | A time in seconds of typing speed of a single event. |
+    | width | int | 77 | Maximum number of characters in one line. |
+    | height | int | 20 | Number of lines of the video |
+
+* Empty lines will add timeout of `3 x step`.
 
 * Lines starting with `#` will be skipped and can serve as comments.
 
-* Lines starting with `$ ` will be typed out one character at the time. Every
-  character after `#` will be brighter.
+* Lines starting with `$ ` will be typed out one character at the time with 
+  `step` timeout in between. Every character after `#` will be brighter.
 
 * Lines starting with "(nix-shell) $ " will be typed out with `(nix-shell) `
   in green color.
 
-* Lines starting with "--" will clear the screen.
+* Lines starting with "--" will clear the screen. A timeout of `18 * step` will
+  be there before the terminal screen clears.
 
 * Everything else will be displayed immediately.
 

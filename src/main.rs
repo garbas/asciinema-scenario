@@ -35,7 +35,7 @@ struct ScenarioHeader {
   #[serde(default = "default_step")]
   step: f64,
 
-  #[serde(default = "default_weight")]
+  #[serde(default = "default_width")]
   width: u32,
 
   #[serde(default = "default_height")]
@@ -46,7 +46,7 @@ fn default_step() -> f64 {
   0.10
 }
 
-fn default_weight() -> u32 {
+fn default_width() -> u32 {
   77
 }
 
