@@ -1,4 +1,4 @@
-# asciinama-scenario
+# asciinema-scenario
 
 ![Build](https://github.com/garbas/asciinema-scenario/workflows/Build/badge.svg)
 
