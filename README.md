@@ -8,6 +8,14 @@ Have you ever re-record your asciinema video over and over again to hit perfect
 speed and avoid making typos? I did, too many times and this is why I wrote
 this tool.
 
+## Installation
+
+If you have [Nix](https://nixos.org/download.html) installed, then issue `nix-build`, and the `asciinema-scenario` executable will be available in `./result/bin/`.
+
+```text
+$ nix-build
+$ result/bin/asciinema-scenario
+```
 
 ## Usage
 
@@ -40,6 +48,17 @@ this tool.
 
 * Everything else will be displayed immediately.
 
+## Tips
+
+* To immediately display a shell command line example (instead of having it being typed out as the default behaviour), precede `$` with a [zero-width space](https://en.wikipedia.org/wiki/Zero-width_space) 
+
+* To quickly play back the scenario you are working on (or any for that matter), use
+
+  ```text
+  $ asciinema-scenario my.scenario | asciinema play -
+  # or
+  $ asciinema play <(asciinema-scenario my.scenario)
+  ```
 
 ## Releases
 
