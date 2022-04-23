@@ -30,7 +30,7 @@ jobs:
         nix_path: nixpkgs=channel:nixpkgs-unstable
 
     - name: Use Cachix
-      uses: cachix/cachix-action@v6
+      uses: cachix/cachix-action@v10
       with:
         name: asciinema-scenario
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
