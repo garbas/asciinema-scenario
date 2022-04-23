@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0 (2022-04-23)
+
+- feat #10: custom timeout (#12)
+
 ## 0.2.0 (2020-09-28)
 
 - bug #4: add some extra timeout before clearing the screen (#7)
