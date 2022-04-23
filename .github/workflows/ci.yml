@@ -1,0 +1,40 @@
+name: "CI"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main 
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-latest
+          - macOS-latest
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+
+    - name: Checking out the repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Installing Nix
+      uses: cachix/install-nix-action@v17
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+
+    - name: Use Cachix
+      uses: cachix/cachix-action@v10
+      with:
+        name: asciinema-scenario
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+
+    - name: Flake check
+      run: |
+        nix flake check --show-trace -L

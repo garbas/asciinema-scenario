@@ -1,3 +1,5 @@
 /target
 /result
 /example/example.svg
+/.direnv/
+/.pre-commit-config.yaml
