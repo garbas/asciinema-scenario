@@ -10,7 +10,9 @@ this tool.
 
 ## Installation
 
-If you have [Nix](https://nixos.org/download.html) installed, then issue `nix-build`, and the `asciinema-scenario` executable will be available in `./result/bin/`.
+If you have [Nix](https://nixos.org/download.html) installed, then issue
+`nix-build`, and the `asciinema-scenario` executable will be available in
+`./result/bin/`.
 
 ```text
 $ nix-build
@@ -35,6 +37,9 @@ $ result/bin/asciinema-scenario
 
 * Empty lines will add timeout of `3 x step`.
 
+* Lines starting with `#timeout: 1.5` will create a 1.5 second timeout. When
+  custom timeout is needed select the timeout you need.
+
 * Lines starting with `#` will be skipped and can serve as comments.
 
 * Lines starting with `$ ` will be typed out one character at the time with 
@@ -50,9 +55,12 @@ $ result/bin/asciinema-scenario
 
 ## Tips
 
-* To immediately display a shell command line example (instead of having it being typed out as the default behaviour), precede `$` with a [zero-width space](https://en.wikipedia.org/wiki/Zero-width_space) 
+* To immediately display a shell command line example (instead of having it
+  being typed out as the default behaviour), precede `$` with a [zero-width
+  space](https://en.wikipedia.org/wiki/Zero-width_space) 
 
-* To quickly play back the scenario you are working on (or any for that matter), use
+* To quickly play back the scenario you are working on (or any for that
+  matter), use
 
   ```text
   $ asciinema-scenario my.scenario | asciinema play -
@@ -69,7 +77,8 @@ Detailed release notes are available in this repo at [CHANGES.md](CHANGES.md).
 
 Found a bug? I'd love to know about it!
 
-Please report all issues on the GitHub [issue tracker](https://github.com/garbas/asciinema-scenario/issues).
+Please report all issues on the GitHub [issue
+tracker](https://github.com/garbas/asciinema-scenario/issues).
 
 
 ## License

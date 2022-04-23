@@ -1,5 +1,7 @@
 $ # How to use asciinema-scenario?
 
+#timeout: 3.0
+
 $ # You first need to write a scenario file for your video.
 $ # It could look something like this:
 

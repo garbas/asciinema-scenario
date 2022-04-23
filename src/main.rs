@@ -233,6 +233,13 @@ fn main() -> Result<(), Error> {
         if index == 0 && line.starts_with("#! ") {
             continue;
 
+        // lines starting with "#timeout: " will create defined timeout
+        } else if line.starts_with("#timeout:") {
+            {
+                let timeout: f64 = line[9..].trim().parse()?;
+                time += timeout;
+            }
+
         // skip lines starting with "#"
         } else if line.starts_with("#") {
             continue;
