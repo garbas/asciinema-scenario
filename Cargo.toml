@@ -25,4 +25,4 @@ log = "0.4.8"
 asciicast = "0.2.2"
 serde_json = "1.0.53"
 serde = { version = "1.0.111", features = ["derive"] }
-svg = "0.8.0"
+svg = "0.10.0"
