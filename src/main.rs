@@ -2,7 +2,7 @@ use asciicast::{Entry, EventType, Header};
 use failure::Error;
 use serde::Deserialize;
 use serde_json::{from_str, to_string};
-use simplelog::{Config, TermLogger, TerminalMode};
+use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
 use std::fs::write;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -174,6 +174,7 @@ fn main() -> Result<(), Error> {
         log_level,            // set log level via "-vvv" flags
         Config::default(),    // how to format logs
         TerminalMode::Stderr, // log to stderr
+        ColorChoice::Auto,    // color preference of an end user
     )?;
 
     // check if does not scenario_file exists
