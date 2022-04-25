@@ -1,34 +1,99 @@
 use asciicast::{Entry, EventType, Header};
 use failure::Error;
+use html_escape::encode_safe;
 use serde::Deserialize;
 use serde_json::{from_str, to_string};
 use simplelog::{Config, TermLogger, TerminalMode};
-use std::fs::write;
+use std::collections::hash_map::DefaultHasher;
+use std::fmt::Display;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
 use std::process::exit;
 use structopt::StructOpt;
 use structopt_flags::{LogLevel, Verbose};
+use svg::node::element::{Element, Mask, Rectangle, Text as TextElement};
+use svg::node::{NodeDefaultHash, Text, Value};
+use svg::{Document, Node};
 
-const SVG_HEADER: &'static str = "<svg
-   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"
-   xmlns:cc=\"http://creativecommons.org/ns#\"
-   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"
-   xmlns:svg=\"http://www.w3.org/2000/svg\"
-   xmlns=\"http://www.w3.org/2000/svg\"
-   version=\"1.1\"
-   width=\"100%\"
-   viewBox=\"0 0 824 623\"
-   preserveAspectRatio=\"xMidYMid meet\">
-  <mask id=\"bigterminal-mask\">
-    <rect x=\"0\" y=\"0\" width=\"824\" height=\"623\" fill=\"#fff\" />
-  </mask>
-  <rect class=\"background\" y=\"0\" x=\"0\" width=\"824\" height=\"623\" />
-  <text mask=\"url(#bigterminal-mask)\" transform=\"translate(0 0)\" y=\"0\" x=\"0\" xml:space=\"preserve\">";
+const TSPAN_TAG: &'static str = "tspan";
 
-const SVG_FOOTER: &'static str = "</text>
-</svg>";
+#[derive(Clone, Debug)]
+pub struct TSpan {
+    inner: Element,
+}
+
+impl TSpan {
+    pub fn new() -> Self {
+        TSpan {
+            inner: Element::new(TSPAN_TAG),
+        }
+    }
+
+    pub fn add<T>(mut self, node: T) -> Self
+    where
+        T: Node,
+    {
+        Node::append(&mut self, node);
+        self
+    }
+
+    #[inline]
+    pub fn set<T, U>(mut self, name: T, value: U) -> Self
+    where
+        T: Into<String>,
+        U: Into<Value>,
+    {
+        Node::assign(&mut self, name, value);
+        self
+    }
+
+    #[inline]
+    pub fn get_inner(&self) -> &Element {
+        &self.inner
+    }
+}
+
+impl Default for TSpan {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl NodeDefaultHash for TSpan {
+    fn default_hash(&self, state: &mut DefaultHasher) {
+        self.inner.default_hash(state);
+    }
+}
+
+impl Node for TSpan {
+    fn append<T>(&mut self, node: T)
+    where
+        T: Node,
+    {
+        self.inner.append(node);
+    }
+
+    fn assign<T, U>(&mut self, name: T, value: U)
+    where
+        T: Into<String>,
+        U: Into<Value>,
+    {
+        self.inner.assign(name, value);
+    }
+}
+
+impl Display for TSpan {
+    fn fmt(&self, formatter: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        self.inner.fmt(formatter)
+    }
+}
+
+impl Into<Element> for TSpan {
+    fn into(self) -> Element {
+        self.inner
+    }
+}
 
 #[derive(Deserialize, Debug)]
 struct ScenarioHeader {
@@ -104,16 +169,7 @@ fn echo_typing(time: &mut f64, step: &f64, line_raw: &str) -> Result<String, Err
         event_data: "\r\n".to_string(),
     })?;
 
-    let parts: Vec<&str> = line_raw.splitn(2, "#").collect();
-    Ok(if parts.len() == 1 {
-        parts[0].to_string()
-    } else {
-        format!(
-            "{}<tspan class=\"fg-15\">#{}</tspan>",
-            parts[0].to_string(),
-            parts.clone().split_off(1).join(""),
-        )
-    })
+    Ok(line_raw.to_string())
 }
 
 fn echo_console_line(
@@ -127,12 +183,11 @@ fn echo_console_line(
     let prompt_line: String;
     let mut preview_lines: Vec<String> = vec![];
 
+    preview_lines.push(prompt.to_string());
     if prompt != "" {
         prompt_line = format!("\x1b[32m{}\x1b[0m$ ", prompt);
-        preview_lines.push(format!("<tspan class=\"fg-2\">{}</tspan>$ ", prompt));
     } else {
         prompt_line = "$ ".to_string();
-        preview_lines.push("$ ".to_string());
     };
 
     print_entry(Entry {
@@ -278,22 +333,67 @@ fn main() -> Result<(), Error> {
 
     match cli.svg_preview_file {
         Some(filename) => {
-            write(
-                filename,
-                format!(
-                    "{}{}{}",
-                    SVG_HEADER,
-                    preview_lines
-                        .into_iter()
-                        .map(|line_items| format!(
-                            "<tspan x=\"0\" dy=\"1.2em\">{}</tspan>",
-                            line_items.join("")
-                        ))
-                        .collect::<Vec<String>>()
-                        .join(""),
-                    SVG_FOOTER,
-                ),
-            )?;
+            let mask_rect = Rectangle::new()
+                .set("x", "0")
+                .set("y", "0")
+                .set("width", "824")
+                .set("height", "623")
+                .set("fill", "#fff");
+            let mask = Mask::new().set("id", "bigterminal-mask").add(mask_rect);
+            let rect = Rectangle::new()
+                .set("class", "background")
+                .set("y", "0")
+                .set("x", "0")
+                .set("width", "824")
+                .set("height", "623");
+
+            let mut text = TextElement::new()
+                .set("mask", "url(#bigterminal-mask)")
+                .set("transform", "translate(0 0)")
+                .set("y", "0")
+                .set("x", "0")
+                .set("xml:space", "preserve");
+
+            for preview_line in preview_lines.into_iter() {
+                let mut tspan = TSpan::new().set("x", "0").set("dy", "1.2em");
+
+                for item in preview_line {
+                    if item == "" {
+                        tspan = tspan.add(Text::new("$ ".to_string()));
+                    } else {
+                        let parts: Vec<&str> = item.splitn(2, "#").collect();
+                        if parts.len() == 1 {
+                            tspan = tspan.add(Text::new(encode_safe(parts[0])));
+                        } else {
+                            tspan = tspan.add(Text::new(encode_safe(parts[0])));
+                            tspan = tspan.add(TSpan::new().set("class", "fg-15").add(Text::new(
+                                encode_safe(parts.clone().split_off(1).join("").as_str()),
+                            )));
+                        }
+                        tspan = tspan.add(
+                            TSpan::new()
+                                .set("class", "fg-2")
+                                .add(Text::new(encode_safe(item.as_str()))),
+                        );
+                    }
+                }
+                text = text.add(tspan);
+            }
+
+            let svg_preview = Document::new()
+                .set("xmlns:dc", "http://purl.org/dc/elements/1.1/")
+                .set("xmlns:cc", "http://creativecommons.org/ns#")
+                .set("xmlns:rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+                .set("xmlns:svg", "http://www.w3.org/2000/svg")
+                .set("xmlns", "http://www.w3.org/2000/svg")
+                .set("version", "1.1")
+                .set("width", "100%")
+                .set("viewBox", "0 0 824 623")
+                .set("preserveAspectRatio", "xMidYMid meet")
+                .add(mask)
+                .add(rect)
+                .add(text);
+            svg::save(filename, &svg_preview)?;
             Ok(())
         }
         None => Ok(()),
