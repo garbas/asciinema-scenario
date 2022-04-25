@@ -1,5 +1,9 @@
 # Changes
 
+## 0.4.0 (2022-??-??)
+
+- bug #3: use svg library to properly encode the text in image preview (#16)
+
 ## 0.3.0 (2022-04-23)
 
 - feat #10: custom timeout (#12)
