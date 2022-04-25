@@ -3,7 +3,7 @@ use failure::Error;
 use html_escape::encode_safe;
 use serde::Deserialize;
 use serde_json::{from_str, to_string};
-use simplelog::{Config, TermLogger, TerminalMode};
+use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
 use std::collections::hash_map::DefaultHasher;
 use std::fmt::Display;
 use std::fs::File;
@@ -229,6 +229,7 @@ fn main() -> Result<(), Error> {
         log_level,            // set log level via "-vvv" flags
         Config::default(),    // how to format logs
         TerminalMode::Stderr, // log to stderr
+        ColorChoice::Auto,    // color preference of an end user
     )?;
 
     // check if does not scenario_file exists
