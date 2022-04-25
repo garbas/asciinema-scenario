@@ -1,6 +1,6 @@
 [package]
 name = "asciinema-scenario"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Rok Garbas <rok@garbas.si>"]
 edition = "2018"
 description = "Create asciinema videos from a text file."
