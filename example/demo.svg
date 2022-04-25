@@ -1,0 +1,256 @@
+<svg preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 824 623" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg">
+<mask id="bigterminal-mask">
+<rect fill="#fff" height="623" width="824" x="0" y="0"/>
+</mask>
+<rect class="background" height="623" width="824" x="0" y="0"/>
+<text mask="url(#bigterminal-mask)" transform="translate(0 0)" x="0" xml:space="preserve" y="0">
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ How to use asciinema-scenario?
+</tspan>
+<tspan class="fg-2">
+# How to use asciinema-scenario?
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ You first need to write a scenario file for your video.
+</tspan>
+<tspan class="fg-2">
+# You first need to write a scenario file for your video.
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ It could look something like this:
+</tspan>
+<tspan class="fg-2">
+# It could look something like this:
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+bat -n demo.scenario
+<tspan class="fg-2">
+bat -n demo.scenario
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   1 
+<tspan class="fg-15">
+! { &quot;step&quot;: 0.10, &quot;width&quot;: 77, &quot;height&quot;: 20 }
+</tspan>
+<tspan class="fg-2">
+   1 #! { &quot;step&quot;: 0.10, &quot;width&quot;: 77, &quot;height&quot;: 20 }
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   2 
+<tspan class="fg-15">
+ This is a comment
+</tspan>
+<tspan class="fg-2">
+   2 # This is a comment
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   3 $ 
+<tspan class="fg-15">
+ This line is going to be typed out
+</tspan>
+<tspan class="fg-2">
+   3 $ # This line is going to be typed out
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   4 $ echo &quot;Hello world&quot;
+<tspan class="fg-2">
+   4 $ echo &quot;Hello world&quot;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   5 Hello world
+<tspan class="fg-2">
+   5 Hello world
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ Now you can use asciinema-scenario to generate cast file.
+</tspan>
+<tspan class="fg-2">
+# Now you can use asciinema-scenario to generate cast file.
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+asciinema-scenario demo.scenario &gt; demo.cast
+<tspan class="fg-2">
+asciinema-scenario demo.scenario &gt; demo.cast
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ To play the video you need to use the asciinema-player
+</tspan>
+<tspan class="fg-2">
+# To play the video you need to use the asciinema-player
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+bat -n index.html
+<tspan class="fg-2">
+bat -n index.html
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   1 &lt;!DOCTYPE html&gt;
+<tspan class="fg-2">
+   1 &lt;!DOCTYPE html&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   2 &lt;html&gt;
+<tspan class="fg-2">
+   2 &lt;html&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   3 &lt;head&gt;
+<tspan class="fg-2">
+   3 &lt;head&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   4   &lt;meta http-equiv=&quot;content-type&quot;
+<tspan class="fg-2">
+   4   &lt;meta http-equiv=&quot;content-type&quot;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   5         content=&quot;text&#x2F;html; charset=utf-8&quot;&gt;
+<tspan class="fg-2">
+   5         content=&quot;text&#x2F;html; charset=utf-8&quot;&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   6   &lt;title&gt;Asciinema Scenario Example&lt;&#x2F;title&gt;
+<tspan class="fg-2">
+   6   &lt;title&gt;Asciinema Scenario Example&lt;&#x2F;title&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   7   &lt;link rel=&quot;stylesheet&quot; 
+<tspan class="fg-2">
+   7   &lt;link rel=&quot;stylesheet&quot; 
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   8         type=&quot;text&#x2F;css&quot;
+<tspan class="fg-2">
+   8         type=&quot;text&#x2F;css&quot;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+   9         href=&quot;asciinema-player.css&quot; &#x2F;&gt;
+<tspan class="fg-2">
+   9         href=&quot;asciinema-player.css&quot; &#x2F;&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  10 &lt;&#x2F;head&gt;
+<tspan class="fg-2">
+  10 &lt;&#x2F;head&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  11 &lt;body&gt;
+<tspan class="fg-2">
+  11 &lt;body&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  12   &lt;h1&gt;Asciinema Scenario Example&lt;&#x2F;h1&gt;
+<tspan class="fg-2">
+  12   &lt;h1&gt;Asciinema Scenario Example&lt;&#x2F;h1&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  13   &lt;asciinema-player cols=&quot;77&quot; 
+<tspan class="fg-2">
+  13   &lt;asciinema-player cols=&quot;77&quot; 
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  14                     rows=&quot;24&quot; 
+<tspan class="fg-2">
+  14                     rows=&quot;24&quot; 
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  15                     src=&quot;example.cast&quot;&gt;&lt;&#x2F;asciinema-player&gt;
+<tspan class="fg-2">
+  15                     src=&quot;example.cast&quot;&gt;&lt;&#x2F;asciinema-player&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  16   &lt;script src=&quot;asciinema-player.js&quot;&gt;&lt;&#x2F;script&gt;
+<tspan class="fg-2">
+  16   &lt;script src=&quot;asciinema-player.js&quot;&gt;&lt;&#x2F;script&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  17 &lt;&#x2F;body&gt;
+<tspan class="fg-2">
+  17 &lt;&#x2F;body&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+  18 &lt;&#x2F;html&gt;
+<tspan class="fg-2">
+  18 &lt;&#x2F;html&gt;
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ That is it. Don&#x27;t rerecord your video because you did a typo or
+</tspan>
+<tspan class="fg-2">
+# That is it. Don&#x27;t rerecord your video because you did a typo or
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ typed to slow.
+</tspan>
+<tspan class="fg-2">
+# typed to slow.
+</tspan>
+</tspan>
+<tspan dy="1.2em" x="0">
+$ 
+
+<tspan class="fg-15">
+ Now read how to write a .scenario file and go crazy!
+</tspan>
+<tspan class="fg-2">
+# Now read how to write a .scenario file and go crazy!
+</tspan>
+</tspan>
+</text>
+</svg>
