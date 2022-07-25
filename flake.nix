@@ -1,8 +1,12 @@
 {
   description = "asciinema-scenario";
 
-  nixConfig.extra-substituters = "https://asciinema-scenario.cachix.org";
-  nixConfig.extra-trusted-public-keys = "asciinema-scenario.cachix.org-1:ql4s3RvH3xgL+TmgOkAvjZEZV8ucc4Qx/bKBQ483BUE=";
+  nixConfig.extra-substituters = [
+    "https://asciinema-scenario.cachix.org"
+  ];
+  nixConfig.extra-trusted-public-keys = [
+    "asciinema-scenario.cachix.org-1:juWxRrRJSm6SI+AmLWkOYpMg0GOzhQUrG2emoTgS/Ts="
+  ];
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-compat.url = "github:edolstra/flake-compat";
