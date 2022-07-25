@@ -1,8 +1,10 @@
 name: Setup Environment
+
 inputs:
   CACHIX_AUTH_TOKEN:
     required: true
     description: 'Cachix Auth Token'
+
 runs:
   using: "composite"
   steps:
@@ -13,4 +15,4 @@ runs:
     - uses: cachix/cachix-action@v10
       with:
         name: asciinema-scenario
-        signingKey: '${{ inputs.CACHIX_AUTH_TOKEN }}'
+        authToken: '${{ inputs.CACHIX_AUTH_TOKEN }}'
