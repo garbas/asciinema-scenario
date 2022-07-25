@@ -1,0 +1,18 @@
+name: Setup Environment
+
+inputs:
+  CACHIX_AUTH_TOKEN:
+    required: true
+    description: 'Cachix Auth Token'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Installing Nix
+      uses: cachix/install-nix-action@v16
+
+    - uses: cachix/cachix-action@v10
+      with:
+        name: asciinema-scenario
+        authToken: '${{ inputs.CACHIX_AUTH_TOKEN }}'

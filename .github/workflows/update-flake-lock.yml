@@ -8,6 +8,7 @@ jobs:
   lockfile:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -15,8 +16,7 @@ jobs:
     - name: Setup
       uses: ./.github/actions/common-setup
       with:
-        CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
     - name: Update flake.lock
       uses: DeterminateSystems/update-flake-lock@v10
