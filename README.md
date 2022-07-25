@@ -1,6 +1,6 @@
 # asciinema-scenario
 
-![Build](https://github.com/garbas/asciinema-scenario/workflows/Build/badge.svg)
+[![CI](https://github.com/garbas/asciinema-scenario/actions/workflows/ci.yml/badge.svg)](https://github.com/garbas/asciinema-scenario/actions/workflows/ci.yml)
 
 Create asciinema videos from a text file.
 
