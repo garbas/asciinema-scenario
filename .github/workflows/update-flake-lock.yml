@@ -19,4 +19,4 @@ jobs:
         CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
     - name: Update flake.lock
-      uses: DeterminateSystems/update-flake-lock@v12
+      uses: DeterminateSystems/update-flake-lock@v13
