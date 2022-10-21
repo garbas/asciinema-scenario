@@ -600,9 +600,9 @@ dependencies = [
 
 [[package]]
 name = "svg"
-version = "0.10.0"
+version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e72d8b19ab05827afefcca66bf47040c1e66a0901eb814784c77d4ec118bd309"
+checksum = "2f85cf5d6da0b5a8b2b6d7bc26dd29121a88d262b3343d9c7c65346c2e3f97b1"
 
 [[package]]
 name = "syn"
