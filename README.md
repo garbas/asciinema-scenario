@@ -80,6 +80,9 @@ Found a bug? I'd love to know about it!
 Please report all issues on the GitHub [issue
 tracker](https://github.com/garbas/asciinema-scenario/issues).
 
+## Similar & Related Projects
+
+* https://github.com/zechris/asciinema-rec_script
 
 ## License
 
